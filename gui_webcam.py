@@ -4,9 +4,16 @@ from PIL import Image
 import cv2
 import imutils
 
+def iniciar():
+    global cap
+    cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+    show()
+
+
+
 root = Tk()
 
-btnIniciar = Button(root,text="Iniciar", width=45)
+btnIniciar = Button(root,text="Iniciar", width=45, command = iniciar)
 btnIniciar.grid(column=0,row=0,padx=5, pady=5)
 
 btnFinalizar = Button(root,text="Finalizar", width=45)
