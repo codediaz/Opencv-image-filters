@@ -31,13 +31,19 @@ def iniciar():
     cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
     show()
 
+def finalizar():
+    # initialize the video stream
+    print("[INFO] end video stream...")  
+    global cap
+    cap.release()
+    
 cap = None
 root = Tk()
 
 btnIniciar = Button(root,text="Iniciar", width=45, command = iniciar)
 btnIniciar.grid(column=0,row=0,padx=5, pady=5)
 
-btnFinalizar = Button(root,text="Finalizar", width=45)
+btnFinalizar = Button(root,text="Finalizar", width=45, command=finalizar)
 btnFinalizar.grid(column=1,row=0,padx=5, pady=5)
 
 
