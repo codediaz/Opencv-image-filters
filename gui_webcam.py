@@ -37,6 +37,17 @@ def finalizar():
     global cap
     cap.release()
     
+def Filtro1():
+    print("[INFO] starting filter 1 in video stream...")    
+    
+def Filtro2():
+    print("[INFO] starting filter 2 in video stream...")   
+
+def Filtro3():
+    print("[INFO] starting filter 3 in video stream...")    
+     
+    
+    
 cap = None
 root = Tk()
 
@@ -47,13 +58,13 @@ btnFinalizar = Button(root,text="Finalizar", width=45, command=finalizar)
 btnFinalizar.grid(column=1,row=0,padx=5, pady=5)
 
 
-btnFiltro1 = Button(root,text="Filtro1", width=25)#, command=Filtro1)
+btnFiltro1 = Button(root,text="Filtro1", width=25, command=Filtro1)
 btnFiltro1.grid(column=0,row=2,padx=5, pady=5)
 
-btnFiltro2 = Button(root,text="Filtro2", width=25)#, command=Filtro1)
+btnFiltro2 = Button(root,text="Filtro2", width=25, command=Filtro2)
 btnFiltro2.grid(column=1,row=2,padx=5, pady=5)
 
-btnFiltro3 = Button(root,text="Filtro3", width=25)#, command=Filtro1)
+btnFiltro3 = Button(root,text="Filtro3", width=25, command=Filtro3)
 btnFiltro3.grid(column=2,row=2,padx=5, pady=5)
 
 lblVideo = Label(root)
