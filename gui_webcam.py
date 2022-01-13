@@ -25,6 +25,8 @@ def show():
         
 
 def iniciar():
+    # initialize the video stream
+    print("[INFO] starting video stream...")    
     global cap
     cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
     show()
