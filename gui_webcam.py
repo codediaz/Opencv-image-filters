@@ -9,8 +9,7 @@ def iniciar():
     cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
     show()
 
-
-
+cap = None
 root = Tk()
 
 btnIniciar = Button(root,text="Iniciar", width=45, command = iniciar)
