@@ -11,7 +11,7 @@ def show():
         ret,frame = cap.read()
         if ret == True:
             frame = imutils.resize(frame, width = 640)
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2LUV)
             im = Image.fromarray(frame)
             img = ImageTk.PhotoImage(image =im)
             
@@ -38,17 +38,69 @@ def finalizar():
     cap.release()
     
 def Filtro1():
-    print("[INFO] starting filter 1 in video stream...")    
+    print("[INFO] starting filter 1 in video stream...") 
+    global cap 
+    cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+    if cap is not None:
+        ret,frame = cap.read()
+        if ret == True:
+            frame = imutils.resize(frame, width = 640)
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2LUV)
+            im = Image.fromarray(frame)
+            img = ImageTk.PhotoImage(image =im)
+            
+            lblVideo.configure(image = img)
+            lblVideo.image = img
+            lblVideo.after(10,show)
+            
+        else:
+            lblVideo.image = ""
+            cap.relase()
     
 def Filtro2():
-    print("[INFO] starting filter 2 in video stream...")   
+    print("[INFO] starting filter 2 in video stream...") 
+    global cap
+    cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+    if cap is not None:
+        ret,frame = cap.read()
+        if ret == True:
+            frame = imutils.resize(frame, width = 640)
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV_FULL)
+            im = Image.fromarray(frame)
+            img = ImageTk.PhotoImage(image =im)
+            
+            lblVideo.configure(image = img)
+            lblVideo.image = img
+            lblVideo.after(10,show)
+            
+        else:
+            lblVideo.image = ""
+            cap.relase()
+      
 
 def Filtro3():
-    print("[INFO] starting filter 3 in video stream...")    
-     
-    
+    print("[INFO] starting filter 3 in video stream...") 
+    global cap
+    cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+    if cap is not None:
+        ret,frame = cap.read()
+        if ret == True:
+            frame = imutils.resize(frame, width = 640)
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            im = Image.fromarray(frame)
+            img = ImageTk.PhotoImage(image =im)
+            
+            lblVideo.configure(image = img)
+            lblVideo.image = img
+            lblVideo.after(10,show)
+            
+        else:
+            lblVideo.image = ""
+            cap.relase()
+
     
 cap = None
+
 root = Tk()
 
 btnIniciar = Button(root,text="Iniciar", width=45, command = iniciar)
