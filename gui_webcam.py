@@ -5,6 +5,9 @@ from PIL import Image
 import cv2
 import imutils
 from Filters.utils import CFEVideoConf, image_resize
+import numpy as np
+import matplotlib.pyplot as plt
+
 
 def show():
     global cap 
