@@ -110,17 +110,23 @@ btnIniciar.grid(column=0,row=0,padx=5, pady=5)
 btnFinalizar = Button(root,text="Finalizar", width=45, command=finalizar)
 btnFinalizar.grid(column=1,row=0,padx=5, pady=5)
 
-
+#Botones para seleccionar los filtros 
 btnFiltro1 = Button(root,text="Filtro1", width=25, command=Filtro1)
 btnFiltro1.grid(column=0,row=2,padx=5, pady=5)
 
 btnFiltro2 = Button(root,text="Filtro2", width=25, command=Filtro2)
-btnFiltro2.grid(column=1,row=2,padx=5, pady=5)
+btnFiltro2.grid(column=0,row=3,padx=5, pady=5)
 
 btnFiltro3 = Button(root,text="Filtro3", width=25, command=Filtro3)
-btnFiltro3.grid(column=2,row=2,padx=5, pady=5)
+btnFiltro3.grid(column=0,row=4,padx=5, pady=5)
 
+#VideoStream de salida
 lblVideo = Label(root)
-lblVideo.grid(column=0,row=1,columnspan=3)
+lblVideo.grid(column=1,row=1, rowspan=6)
+
+#Label 
+lblInfoFiltros = Label(root, text ="Elija un filtro, por favor", width=25)
+lblInfoFiltros.grid(column=0,row=1, padx=5,pady=5)
+
 root.mainloop()
 
