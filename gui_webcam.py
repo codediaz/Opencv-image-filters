@@ -4,6 +4,7 @@ from PIL import ImageTk
 from PIL import Image
 import cv2
 import imutils
+from Filters.utils import CFEVideoConf, image_resize
 
 def show():
     global cap 
