@@ -8,6 +8,33 @@ from Filters.utils import CFEVideoConf, image_resize
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Configure VideoCapture class instance for using camera or file input.
+bins = 16
+var = 0
+
+# Initialize plot.
+# Initialize plot.
+fig, ax = plt.subplots()
+ax.set_title('Histogram Stream Video')
+ax.set_xlabel('Bin')
+ax.set_ylabel('Frequency')
+
+# Configure VideoCapture
+global capure
+capture = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+
+# Initialize plot line object(s). Turn on interactive plotting and show plot.
+lw = 3
+alpha = 0.5
+lineR, = ax.plot(np.arange(bins), np.zeros((bins,)), c='r', lw=lw, alpha=alpha)
+lineG, = ax.plot(np.arange(bins), np.zeros((bins,)), c='g', lw=lw, alpha=alpha)
+lineB, = ax.plot(np.arange(bins), np.zeros((bins,)), c='b', lw=lw, alpha=alpha)
+ax.set_xlim(0, bins-1)
+ax.set_ylim(0, 1)
+plt.ion()
+plt.show()
+
+
 
 def show():
     global cap 
@@ -29,15 +56,40 @@ def show():
 
         
 
-def iniciar():
+"""def iniciar():
     # initialize the video stream
     print("[INFO] starting video stream...")    
     global cap
     cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
-    """frames_per_seconds = 20
-    save_path='saved-media/filter.mp4'
-    config = CFEVideoConf(cap, filepath=save_path, res='480p')"""
-    show()
+    show()"""
+    
+def iniciar():
+        while True:
+            (grabbed, frame) = capture.read()
+
+            if not grabbed:
+                break
+            
+            
+            # Resize frame to width, if specified.
+            numPixels = np.prod(frame.shape[:2]) 
+            (b, g, r) = cv2.split(frame)
+            histogramR = cv2.calcHist([r], [0], None, [bins], [0, 255]) / numPixels
+            histogramG = cv2.calcHist([g], [0], None, [bins], [0, 255]) / numPixels
+            histogramB = cv2.calcHist([b], [0], None, [bins], [0, 255]) / numPixels
+            lineR.set_ydata(histogramR)
+            lineG.set_ydata(histogramG)
+            lineB.set_ydata(histogramB)
+            im = Image.fromarray(frame)
+            img = ImageTk.PhotoImage(image =im)
+            fig.canvas.draw()
+
+            global cap
+            cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+           
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
 def finalizar():
     # initialize the video stream
@@ -138,4 +190,6 @@ lblInfoFiltros = Label(root, text ="Elija un filtro, por favor", width=25)
 lblInfoFiltros.grid(column=0,row=1, padx=5,pady=5)
 
 root.mainloop()
+cap.release()
+cv2.destroyAllWindows()
 
